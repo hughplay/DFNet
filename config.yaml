@@ -1,0 +1,133 @@
+---
+# 0. Datasets
+# You can define multiple datasets and use them later.
+places2_inpaint:
+  train_path: "/data/datasets/places2/places_train.info"
+  val_path: "/data/datasets/places2/places_valid.info"
+  mask_path: "/data/datasets/places2/mask_strokes_and_shapes.info"
+---
+# 1. Experiment common used information
+tag: 'inpaint.dfn.63'
+task: 'inpaint'
+description: 'Use conv2d, compare to pconv.'
+update:
+date: '2019-04-04'
+
+# Support attr: ['batch_size', 'dataset', 'date', 'device', 'dpflow_device', 'input_size', 'split', 'tag', 'task', 'username']
+# You can define extra attributes in 'extra'
+exp_id_format: [task, model, input_size, date, tag]
+dpflow_format: [username, dataset, split, input_size, batch_size, dpflow_device]
+
+extra:  # Will be used to generate `exp_id`
+  model: 'Conv.StyleLoss'
+
+computed: true           # whether auto computed variables are computed.
+
+exp_id: 'inpaint.Conv.StyleLoss.512x512.2019-04-04.inpaint.dfn.63'                                   # auto computed, depending on train settings.
+
+experiment_root: '/data/train_log/hongxin/inpaint'
+rrun_root: '/data/train_log/hongxin/rrun'
+
+model_dir: '/data/train_log/hongxin/inpaint/conv/dfn/places2/best/num/inpaint.Conv.StyleLoss.512x512.2019-04-04.inpaint.dfn.63/models'                                                                 # auto computed, experiment_root/exp_id/models
+tensorboard_dir: '/data/train_log/hongxin/inpaint/conv/dfn/places2/best/num/inpaint.Conv.StyleLoss.512x512.2019-04-04.inpaint.dfn.63/tb'                                                                 # auto computed, experiment_root/exp_id/tensorboard
+log_dir: '/data/train_log/hongxin/inpaint/conv/dfn/places2/best/num/inpaint.Conv.StyleLoss.512x512.2019-04-04.inpaint.dfn.63/log'                                                                 # auto computed, experiment_root/exp_id/log
+result_dir: '/data/train_log/hongxin/inpaint/conv/dfn/places2/best/num/inpaint.Conv.StyleLoss.512x512.2019-04-04.inpaint.dfn.63/results'                                                                 # auto computed, experiment_root/exp_id/results
+
+model_latest: 'latest.pth'
+model_best: 'best.pth'
+
+data_script: 'start_dpflow.py'
+---
+# 2. Training settings
+continue: true
+remove_old: false
+
+# Data settings
+dataset: 'places2_inpaint'
+split: 'train'
+input_size: [512, 512] # scalar or list [height, width]
+batch_size: 6 # per GPU
+seed: 2019
+dpflow_base_name: 'hongxin.places2_inpaint.train.512x512.6.8x4'      # auto computed, based on `dpflow_format`
+dpflow_replicas: 8 # Generally, same as total number of gpus
+worker_per_dpflow: 4
+
+# Trainer setting
+device:
+- {num: 1, gpu: 8, cpu: 16, memory: 51200}  # Memory in MiB
+
+model:
+  c_img: 3
+  c_mask: 1
+  c_alpha: 3
+  mode: 'nearest'
+  norm: 'batch'
+  act_en: 'relu'
+  act_de: 'leaky_relu'
+  en_ksize: [7, 5, 5, 3, 3, 3, 3, 3]
+  de_ksize: [3, 3, 3, 3, 3, 3, 3, 3]
+  blend_layers: [0, 1, 2, 3, 4, 5]
+
+optimizer:
+  name: 'Adam'
+  args:
+    lr: 0.0002
+
+epoch: 20
+iter_per_epoch: 37500
+lr_decay_epoch: 5
+lr_decay_ratio: 0.1
+
+loss:
+  c_img: 3
+  w_l1: 6.
+  w_percep: 0.1
+  w_style: 240.
+  w_tv: 0.1
+  structure_layers: [0, 1, 2, 3, 4, 5]
+  texture_layers: [0, 1, 2]
+
+log_level: 'INFO'
+action:
+  save_model: true
+  validate: false
+  tensorboard: true
+  model_graph: false # depend on tensorboard
+
+log_interval: 10
+model_save_interval: 1000 # (iters)
+validate_interval: 1000
+validate:
+  dataset: 'places2_inpaint'
+  split: 'val'
+  num: 20
+  input_size: [512, 512]
+  batch_size: 1 # To keep the original size of images
+---
+# 3. Testing settings
+# Auto compute: the following parameter will be compute automatically
+device:
+- {num: 1, gpu: 1, cpu: 4, memory: 10240}  # Memory in MiB
+
+model: 'best'
+data_tag: 'places2-1000'
+
+img: /data/train_log/hongxin/inpaint/data/sample512-1000/img
+mask: /data/train_log/hongxin/inpaint/data/sample512-1000/mask
+input_size: [512, 512]
+batch_size: 16
+
+action:
+  save: ['final']
+  metrics:
+
+dataset: 'places2'
+split: 'val'
+seed: 2019
+dpflow_base_name: 'hongxin.places2.val.512x512.16.1x2'             # auto computed
+dpflow_replicas: 1 # Generally, same as number of gpus
+worker_per_dpflow: 2
+---
+# 4. Training & Testing record
+train: []
+test: []
