@@ -18,6 +18,14 @@ The results show the superior performance of DFNet,
 especially in the aspects of harmonious texture transition, texture detail and semantic structural consistency.
 More detail can be found in our [paper](https://arxiv.org/abs/1904.08060)
 
+The illustration of a fusion block:
+
+<p align="center">
+  <img width="600" src="imgs/fusion-block.jpg">
+</p>
+
+Examples of corresponding images:
+
 ![](imgs/github_teaser.jpg)
 
 If you find this code useful for your research, please cite:
