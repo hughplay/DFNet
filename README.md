@@ -3,19 +3,18 @@
 ## Introduction
 
 Deep image completion usually fails to harmonically blend the restored image into existing content,
-especially in the boundary area.
-Our method handles with this problem from a new perspective of
-creating a smooth transition and proposes a concise Deep Fusion Network (DFNet).
-Firstly, a fusion block is introduced to generate a flexible alpha composition map
-for combining known and unknown regions.
-The fusion block not only provides a smooth fusion between restored and existing content,
-but also provides an attention map to make network focus more on the unknown pixels.
-In this way, it builds a bridge for structural and texture information,
-so that information can be naturally propagated from known region into completion.
-Furthermore, fusion blocks are embedded into several decoder layers of the network.
-Accompanied by the adjustable loss constraints on each layer, more accurate structure information are achieved.
-The results show the superior performance of DFNet,
-especially in the aspects of harmonious texture transition, texture detail and semantic structural consistency.
+especially in the boundary area. And it often fails to completing complex structures.
+
+We first introduce **Fusion Block** to generate a flexible alpha composition map for combining known and unknown regions.
+It builds a bridge for structural and texture information, so that information can be naturally propagated from known region into completion.
+With this technology, the completion results will have smooth transition near the boundary of unknown region.
+
+The architecture of fusion block enable us to apply **multi-scale constraints**.
+Multi-scale constrains improves the performance of DFNet a lot on structure consistency.
+
+Further more, **it's easy to apply this fusion block and multi-scale constrains to other existing deep image completion models**.
+A fusion block needs feature maps and input image, and then will give you a completion result in the same resolution as given feature maps.
+
 More detail can be found in our [paper](https://arxiv.org/abs/1904.08060)
 
 The illustration of a fusion block:
@@ -31,7 +30,7 @@ Examples of corresponding images:
 If you find this code useful for your research, please cite:
 
 ```
-@inproceedings{xin2019dfnet,
+@inproceedings{DFNet2019,
   title={Deep Fusion Network for Image Completion},
   author={Xin Hong and Pengfei Xiong and Renhe Ji and Haoqiang Fan},
   journal={arXiv preprint},
@@ -72,6 +71,12 @@ There are already some sample images in the `samples/celeba` folder.
 ``` sh
 python test.py --model model/model_celeba.pth --img samples/celeba/img --mask samples/celeba/mask --output output/celeba --merge
 ```
+
+## Training
+
+Currently we don't provide training code.
+If you want to train this model on your own dataset, there are some training settings in `config.yaml` may be useful.
+And the loss functions which defined in `loss.py` is available.
 
 ## License
 
