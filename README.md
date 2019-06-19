@@ -3,17 +3,17 @@
 ## Introduction
 
 Deep image completion usually fails to harmonically blend the restored image into existing content,
-especially in the boundary area. And it often fails to completing complex structures.
+especially in the boundary area. And it often fails to complete complex structures.
 
-We first introduce **Fusion Block** to generate a flexible alpha composition map for combining known and unknown regions.
-It builds a bridge for structural and texture information, so that information can be naturally propagated from known region into completion.
-With this technology, the completion results will have smooth transition near the boundary of unknown region.
+We first introduce **Fusion Block** for generating a flexible alpha composition map to combine known and unknown regions.
+It builds a bridge for structural and texture information, so that information in known region can be naturally propagated into completion area.
+With this technology, the completion results will have smooth transition near the boundary of completion area.
 
-The architecture of fusion block enable us to apply **multi-scale constraints**.
+Furthermore, the architecture of fusion block enable us to apply **multi-scale constraints**.
 Multi-scale constrains improves the performance of DFNet a lot on structure consistency.
 
-Further more, **it's easy to apply this fusion block and multi-scale constrains to other existing deep image completion models**.
-A fusion block needs feature maps and input image, and then will give you a completion result in the same resolution as given feature maps.
+Moreover, **it is easy to apply this fusion block and multi-scale constrains to other existing deep image completion models**.
+A fusion block feed with feature maps and input image, will give you a completion result in the same resolution as given feature maps.
 
 More detail can be found in our [paper](https://arxiv.org/abs/1904.08060)
 
