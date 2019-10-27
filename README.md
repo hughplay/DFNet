@@ -15,7 +15,7 @@ Multi-scale constrains improves the performance of DFNet a lot on structure cons
 Moreover, **it is easy to apply this fusion block and multi-scale constrains to other existing deep image completion models**.
 A fusion block feed with feature maps and input image, will give you a completion result in the same resolution as given feature maps.
 
-More detail can be found in our [paper](https://arxiv.org/abs/1904.08060)
+More detail can be found in our [paper](https://dl.acm.org/citation.cfm?doid=3343031.3351002)
 
 The illustration of a fusion block:
 
@@ -30,12 +30,23 @@ Examples of corresponding images:
 If you find this code useful for your research, please cite:
 
 ```
-@inproceedings{DFNet2019,
-  title={Deep Fusion Network for Image Completion},
-  author={Xin Hong and Pengfei Xiong and Renhe Ji and Haoqiang Fan},
-  journal={arXiv preprint},
-  year={2019},
-}
+@inproceedings{Hong:2019:DFN:3343031.3351002,
+ author = {Hong, Xin and Xiong, Pengfei and Ji, Renhe and Fan, Haoqiang},
+ title = {Deep Fusion Network for Image Completion},
+ booktitle = {Proceedings of the 27th ACM International Conference on Multimedia},
+ series = {MM '19},
+ year = {2019},
+ isbn = {978-1-4503-6889-6},
+ location = {Nice, France},
+ pages = {2033--2042},
+ numpages = {10},
+ url = {http://doi.acm.org/10.1145/3343031.3351002},
+ doi = {10.1145/3343031.3351002},
+ acmid = {3351002},
+ publisher = {ACM},
+ address = {New York, NY, USA},
+ keywords = {alpha composition, deep fusion network, fusion block, image completion, inpainting},
+} 
 ```
 
 ## Prerequisites
