@@ -85,9 +85,7 @@ python test.py --model model/model_celeba.pth --img samples/celeba/img --mask sa
 
 ## Training
 
-Currently we don't provide training code.
-If you want to train this model on your own dataset, there are some training settings in `config.yaml` may be useful.
-And the loss functions which defined in `loss.py` is available.
+Please refer to: https://github.com/deepcodebase/inpaint. It is building in progress but looks good so far.
 
 ## License
 
