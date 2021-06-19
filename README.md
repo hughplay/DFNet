@@ -57,6 +57,9 @@ If you find this code useful for your research, please cite:
 
 ## Testing
 
+[<img src="https://colab.research.google.com/assets/colab-badge.svg">](https://colab.research.google.com/github/hughplay/DFNet/blob/master/demo.ipynb)
+
+
 Clone this repo:
 
 ``` py
