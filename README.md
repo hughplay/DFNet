@@ -1,64 +1,64 @@
 # Deep Fusion Network for Image completion
 
-## Introduction
+Official repository for ["Deep Fusion Network for Image completion"](https://github.com/hughplay/DFNet).
+
+<!-- ![inpainting results](imgs/github_teaser.jpg) -->
+<img width="720" src="imgs/github_teaser.jpg">
+
+**Figure:** *Results from DFNet. Fusion Result = (1 - Alpha) \* Input + Alpha \* Raw. Both Raw and Alpha are model outputs.*
+
+> **Deep Fusion Network for Image Completion** <br>
+> Xin Hong, Pengfei Xiong, Renhe Ji, Haoqiang Fan <br>
+> *Published on Proceedings of the 27th ACM International Conference on Multimedia (ACMMM 2019)*
+
+<!-- [![](docs/_static/imgs/project.svg)](https://hongxin2019.github.io) -->
+[![](https://img.shields.io/badge/-code-green?style=flat-square&logo=github&labelColor=gray)](https://github.com/hughplay/DFNet)
+[![](https://img.shields.io/badge/-pdf-b31b1b?style=flat-square&logo=adobeacrobatreader)](https://dl.acm.org/doi/pdf/10.1145/3343031.3351002)
+[![](https://img.shields.io/badge/Open_in_Colab-blue?style=flat-square&logo=google-colab&labelColor=gray)](https://colab.research.google.com/github/hughplay/DFNet/blob/master/demo.ipynb)
+[![](https://img.shields.io/badge/PyTorch-ee4c2c?style=flat-square&logo=pytorch&logoColor=white)](https://pytorch.org/get-started/locally/)
+<!-- [![](https://img.shields.io/badge/-Lightning-792ee5?style=flat-square&logo=pytorchlightning&logoColor=white)](https://pytorchlightning.ai/) -->
+[![](docs/_static/imgs/hydra.svg)](https://hydra.cc)
+
+
+## Description
 
 Deep image completion usually fails to harmonically blend the restored image into existing content,
 especially in the boundary area. And it often fails to complete complex structures.
 
+<img align="right" width="360" src="imgs/fusion-block.jpg">
+
 We first introduce **Fusion Block** for generating a flexible alpha composition map to combine known and unknown regions.
 It builds a bridge for structural and texture information, so that information in known region can be naturally propagated into completion area.
-With this technology, the completion results will have smooth transition near the boundary of completion area.
-
-Furthermore, the architecture of fusion block enable us to apply **multi-scale constraints**.
+With this technology, the completion results will have smooth transition near the boundary of completion area. Furthermore, the architecture of fusion block enable us to apply **multi-scale constraints**.
 Multi-scale constrains improves the performance of DFNet a lot on structure consistency.
 
 Moreover, **it is easy to apply this fusion block and multi-scale constrains to other existing deep image completion models**.
 A fusion block feed with feature maps and input image, will give you a completion result in the same resolution as given feature maps.
 
-More detail can be found in our [paper](https://dl.acm.org/citation.cfm?doid=3343031.3351002)
+If you find this code useful, please consider to star this repo and cite us:
 
-The illustration of a fusion block:
-
-<p align="center">
-  <img width="600" src="imgs/fusion-block.jpg">
-</p>
-
-Examples of corresponding images:
-
-![](imgs/github_teaser.jpg)
-
-If you find this code useful for your research, please cite:
-
+``` bibtex
+@inproceedings{hongDeepFusionNetwork2019,
+  title = {Deep {{Fusion Network}} for {{Image Completion}}},
+  booktitle = {Proceedings of the 27th {{ACM International Conference}} on {{Multimedia}}},
+  author = {Hong, Xin and Xiong, Pengfei and Ji, Renhe and Fan, Haoqiang},
+  year = {2019},
+  series = {{{MM}} '19},
+  pages = {2033--2042},
+  keywords = {alpha composition,deep fusion network,fusion block,image completion,inpainting}
+}
 ```
-@inproceedings{Hong:2019:DFN:3343031.3351002,
- author = {Hong, Xin and Xiong, Pengfei and Ji, Renhe and Fan, Haoqiang},
- title = {Deep Fusion Network for Image Completion},
- booktitle = {Proceedings of the 27th ACM International Conference on Multimedia},
- series = {MM '19},
- year = {2019},
- isbn = {978-1-4503-6889-6},
- location = {Nice, France},
- pages = {2033--2042},
- numpages = {10},
- url = {http://doi.acm.org/10.1145/3343031.3351002},
- doi = {10.1145/3343031.3351002},
- acmid = {3351002},
- publisher = {ACM},
- address = {New York, NY, USA},
- keywords = {alpha composition, deep fusion network, fusion block, image completion, inpainting},
-} 
-```
+
 
 ## Prerequisites
-
 - Python 3
 - PyTorch 1.0
 - OpenCV
 
+
 ## Testing
 
-[<img src="https://colab.research.google.com/assets/colab-badge.svg">](https://colab.research.google.com/github/hughplay/DFNet/blob/master/demo.ipynb)
-
+We provide an interactive [Colab demo](https://colab.research.google.com/github/hughplay/DFNet/blob/master/demo.ipynb) for trying DFNet. You can also test our model with the following steps.
 
 Clone this repo:
 
